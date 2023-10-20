@@ -9,17 +9,17 @@ use BenSampo\Enum\Enum;
  * @method static static OptionTwo()
  * @method static static OptionThree()
  */
-final class TableStatus extends Enum
+final class TableLocations extends Enum
 {
     const OptionOne = 1;
     const OptionTwo = 2;
-    const OptionThree = 3;
+    const OptionThree =3;
 
     public static function cases(){
         return[
-            self::OptionOne => 'Darft',
-            self::OptionTwo => 'Publish',
-            self::OptionThree => 'Inhert'
+            self::OptionOne => 'Inside',
+            self::OptionTwo => 'Outside',
+            self::OptionThree => 'Font'
         ];
 
     }

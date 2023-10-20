@@ -1,8 +1,7 @@
-
 <x-admin-layout>
     <div class="container d-flex justify-center">
         <div class="p-3 bg-info w-50 rounded-md">
-            <form action="{{route('admin.menus.update',$menu)}}" method="POST">
+            <form action="{{route('admin.menus.update',$menu)}}" method="POST" enctype="multipart/form-data">
                 @method('put')
                 @csrf
                 <div class="form-group">

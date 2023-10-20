@@ -17,17 +17,16 @@ class MenuController extends Controller
         return view('Admin.Menu.index',compact('menus'));
 
     }
-
     public function create(){
         $categories=Catogure::all();
         return view('Admin.Menu.create',compact('categories'));
     }
-
     public function show(){
 
     }
 
     public function update(Request $request,Menu $menu){
+
         $request->validate([
             'name'=>'required',
             'image'=>'required',
@@ -39,16 +38,13 @@ class MenuController extends Controller
             Storage::delete($menu->image);
             $image=$request->file('image')->store('public/menu');
         }
-
         $menu->update([
             'name'=>$request->name,
             'image'=>$image,
             'description'=>$request->description,
             'catogure_id'=>$request->catogure_id,
         ]);
-
         return redirect('admin/menus');
-
     }
 
     public function destroy(Menu $menu){
@@ -76,5 +72,4 @@ class MenuController extends Controller
 
         // Menu::create($request->except('_token'));
     }
-
 }

@@ -1,8 +1,7 @@
-
 <x-admin-layout>
     <div class="container d-flex justify-center">
         <div class="p-3 bg-info w-50 rounded-md">
-            <form action="{{route('admin.catogures.update',$catogure)}}" method="POST">
+            <form action="{{route('admin.catogures.update',$catogure)}}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="form-group">

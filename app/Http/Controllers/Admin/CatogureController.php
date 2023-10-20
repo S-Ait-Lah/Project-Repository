@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CatogureStoreRequest;
 use App\Models\Catogure;
@@ -29,30 +27,28 @@ class CatogureController extends Controller
     }
     public function edit(Catogure $catogure){
 
-        return view('Admin.Catogure.edite',compact('catogure'));
+        return view('Admin.Catogure.edite',compact(['catogure']));
     } 
     public function destroy(Catogure $catogure){
         $catogure->delete();
         return redirect('/admin/catogures');
-
     }
-    public function update(Request $request,Catogure $categure){
+    public function update(Request $request,Catogure $catogure){
+
         $request->validate([
             'name'=>'required',
             'description'=>'required',
+            'image'=>'required'
         ]);
-        $image = $categure->image;
+        $image = $catogure->image;
         if($request->hasFile('image')){
-            Storage::delete($categure->image);
+            Storage::delete($catogure->image);
             $image=$request->file('image')->store('public/catogures');
         } 
-        dd($categure);
-
-        $categure->update([
+        $catogure->update([
             'name'=>$request->name,
             'image'=>$image,
             'description'=>$request->description,
-            'catogure_id'=>$request->catogure_id,
         ]);
         return redirect('admin/catogures');
     }

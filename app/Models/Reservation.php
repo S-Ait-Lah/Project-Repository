@@ -18,6 +18,7 @@ class Reservation extends Model
                             'guest_number',
                             'res_date',
                             'location',
+                            'table_id'
                         ];
     protected $casts=[
                         'status'=>TableLocation::class, 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
+use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
 
@@ -16,7 +17,8 @@ class ReservationController extends Controller
     }
 
     public function create(){
-        return view('Admin.Reservation.create');
+        $tables=Table::where('status','darft')->get();
+        return view('Admin.Reservation.create',compact('tables'));
 
     }
 
@@ -24,12 +26,13 @@ class ReservationController extends Controller
 
     }
 
-    public function edite(){
-
+    public function edit(Reservation $reservation){
+        return view('Admin.Reservation.edite',compact('reservation'));
     }
 
     public function destroy(Reservation $reservation){
         $reservation->delete();
+        return redirect('/admin/reservations');
     }
 
     public function update(){
@@ -45,8 +48,12 @@ class ReservationController extends Controller
                             'guest_number'=>$request->guest_number,
                             'res_date'=>$request->res_date,
                             'location'=>$request->location,
+                            'table_id'=>$request->table_id,
                         ]);
         //  Reservation::create($request->validated());
+        return redirect('/admin/reservations');
+
     }
+
 
 }

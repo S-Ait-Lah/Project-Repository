@@ -17,7 +17,7 @@ class TableController extends Controller
     }
 
     public function create(){
-        return view('create');
+        return view('Admin.Table.create');
 
     }
 
@@ -25,15 +25,29 @@ class TableController extends Controller
 
     }
 
-    public function edite(){
-
+    public function edit(Table $table){
+        return view('Admin.Table.edite',compact('table'));
     }
 
     public function destroy(Table $table){
         $table->delete();
+        return redirect('admin/tables');
     }
 
-    public function update(){
+    public function update(Request $request,Table $table){
+        $this->validate($request,[
+            'name'=>'required',
+            'guest_number'=>'required',
+            'status'=>'required',
+            'location'=>'required',
+        ]);
+        $table->update([
+            'name'=>$request->name,
+            'guest_number'=>$request->guest_number,
+            'status'=>$request->status,
+            'location'=>$request->location,
+        ]);
+        return redirect('admin/tables');
 
     }
 
@@ -44,6 +58,8 @@ class TableController extends Controller
                             'location'=>$request->location,
                             'guest_number'=>$request->guest_number,
         ]);
+
+        return redirect('admin/tables');
 
     }
 

@@ -13,6 +13,7 @@
                   <th class="border border-slate-300 ...">Phone</th>
                   <th class="border border-slate-300 ...">Guest Number</th>
                   <th class="border border-slate-300 ...">Reservation Date</th>
+                  <th class="border border-slate-300 ...">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,6 +26,24 @@
                     <td class="border border-slate-300 ...">{{$value->tel_number}}</td>
                     <td class="border border-slate-300 ...">{{$value->guest_number}}</td>
                     <td class="border border-slate-300 ...">{{$value->res_date}}</td>
+                    <td class="border border-slate-300 ...">
+                      <div class="d-flex justify-content-center">
+                        <div class="pe-2">
+                          <form action="{{route('admin.reservations.destroy',$value)}}" method="POST">
+                            @method('delete')
+                            @csrf
+                            <button class="bg-danger text-light p-2"><i class="bi bi-x"></i><button>
+                          </form>
+                        </div>
+                        <div class="">
+                          <form action="{{route('admin.reservations.edit',$value)}}" method="POST">
+                            @method('get')
+                            @csrf
+                            <button class="text-light bg-primary p-2"><i class="bi bi-pencil"></i></button>
+                          </form>
+                        </div>
+                      </div>
+                    </td>
                 </tr>
               @endforeach
             </tbody>
